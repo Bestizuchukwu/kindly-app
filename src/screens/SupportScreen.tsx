@@ -13,13 +13,14 @@ export default function SupportScreen() {
     return {
       ...detail,
       title: selectedAction,
-      summary: selectedAction === 'Take a breather' 
-        ? 'A gentle reset helps your body and brain come back to a steady rhythm.'
-        : selectedAction === 'Speak with someone'
-          ? 'Connect to a human for reassurance, perspective, and next-step support.'
-          : selectedAction === 'Keep it simple'
-            ? 'Reduce the load by focusing only on what feels essential right now.'
-            : 'A short timer helps create enough space to focus without pressure.',
+      summary:
+        selectedAction === 'Take a breather'
+          ? 'A gentle reset helps your body and brain come back to a steady rhythm.'
+          : selectedAction === 'Speak with someone'
+            ? 'Connect to a human for reassurance, perspective, and next-step support.'
+            : selectedAction === 'Keep it simple'
+              ? 'Reduce the load by focusing only on what feels essential right now.'
+              : 'A short timer helps create enough space to focus without pressure.',
     };
   }, [selectedAction]);
 

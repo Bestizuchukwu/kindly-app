@@ -3,31 +3,11 @@ export type Mood = 'Calm' | 'Stressed' | 'Tired' | 'Joyful' | 'Anxious';
 export const moodOptions: Mood[] = ['Calm', 'Stressed', 'Tired', 'Joyful', 'Anxious'];
 
 export const moodGuidance: Record<Mood, { title: string; advice: string; tone: 'primary' | 'warm' | 'mint' }> = {
-  Calm: {
-    title: 'Steady rhythm',
-    advice: 'Keep the next action small and gentle.',
-    tone: 'mint',
-  },
-  Stressed: {
-    title: 'Reduce pressure',
-    advice: 'Cut the task list to one meaningful step.',
-    tone: 'warm',
-  },
-  Tired: {
-    title: 'Protect energy',
-    advice: 'Choose the easiest possible next step and pause.',
-    tone: 'primary',
-  },
-  Joyful: {
-    title: 'Lean into momentum',
-    advice: 'Channel this energy into something meaningful and doable.',
-    tone: 'mint',
-  },
-  Anxious: {
-    title: 'Create calm',
-    advice: 'Focus on clarity, safety, and one clear action.',
-    tone: 'warm',
-  },
+  Calm: { title: 'Steady rhythm', advice: 'Keep the next action small and gentle.', tone: 'mint' },
+  Stressed: { title: 'Reduce pressure', advice: 'Cut the task list to one meaningful step.', tone: 'warm' },
+  Tired: { title: 'Protect energy', advice: 'Choose the easiest possible next step and pause.', tone: 'primary' },
+  Joyful: { title: 'Lean into momentum', advice: 'Channel this energy into something meaningful and doable.', tone: 'mint' },
+  Anxious: { title: 'Create calm', advice: 'Focus on clarity, safety, and one clear action.', tone: 'warm' },
 };
 
 export const homeActions = [
@@ -52,7 +32,7 @@ export const actionDetails: Record<string, { title: string; summary: string; acc
   },
   Privacy: {
     title: 'Privacy',
-    summary: 'Review how much information is shared and how you can stay in control.',
+    summary: 'Review how much information is shared and how you stay in control.',
     accent: 'warm',
     cta: 'Review privacy',
   },

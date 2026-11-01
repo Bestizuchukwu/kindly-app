@@ -35,12 +35,12 @@ export default function AppNavigator() {
           borderRadius: 16,
           marginHorizontal: 2,
         },
-        tabBarActiveTintColor: palette.primary,
-        tabBarInactiveTintColor: '#9AA9BF',
         tabBarLabelStyle: {
           fontSize: 11,
           fontWeight: '700',
         },
+        tabBarActiveTintColor: palette.primary,
+        tabBarInactiveTintColor: '#9AA9BF',
       }}
     >
       <Tab.Screen

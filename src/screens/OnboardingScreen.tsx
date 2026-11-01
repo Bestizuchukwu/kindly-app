@@ -70,7 +70,7 @@ export default function OnboardingScreen({ onContinue }: OnboardingScreenProps) 
               onPress={() => selectOption(option)}
               activeOpacity={0.9}
             >
-              <Text style={styles.optionText}>{option}</Text>
+              <Text style={[styles.optionText, answers[currentQuestion.key] === option && styles.optionTextSelected]}>{option}</Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -160,6 +160,9 @@ const styles = StyleSheet.create({
     color: palette.white,
     fontSize: 16,
     fontWeight: '700',
+  },
+  optionTextSelected: {
+    color: palette.primary,
   },
   secondaryButton: {
     alignSelf: 'flex-start',

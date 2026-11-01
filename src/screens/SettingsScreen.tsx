@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
-import { actionDetails, settingsRows } from '../data/mockData';
+import { settingsRows } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SettingsScreen() {

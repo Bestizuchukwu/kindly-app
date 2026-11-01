@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import { moodGuidance, moodOptions, supportPlans, type Mood } from '../data/mockData';
 import { palette } from '../theme/colors';
