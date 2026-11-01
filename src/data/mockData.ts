@@ -2,6 +2,17 @@ export type Mood = 'Calm' | 'Stressed' | 'Tired' | 'Joyful' | 'Anxious';
 
 export const moodOptions: Mood[] = ['Calm', 'Stressed', 'Tired', 'Joyful', 'Anxious'];
 
+export const userProfile = {
+  firstName: 'Sam',
+  role: 'You deserve a thoughtful rhythm today',
+};
+
+export const dailyMoments = [
+  { title: 'Slow start', text: 'A softer beginning can make the rest of the day feel lighter.', accent: 'mint' },
+  { title: 'Reset point', text: 'Take a break when your energy starts to slip.', accent: 'primary' },
+  { title: 'Gentle check-in', text: 'Notice what feels easier, kinder, or more manageable.', accent: 'warm' },
+];
+
 export const moodGuidance: Record<Mood, { title: string; advice: string; tone: 'primary' | 'warm' | 'mint' }> = {
   Calm: { title: 'Steady rhythm', advice: 'Keep the next action small and gentle.', tone: 'mint' },
   Stressed: { title: 'Reduce pressure', advice: 'Cut the task list to one meaningful step.', tone: 'warm' },

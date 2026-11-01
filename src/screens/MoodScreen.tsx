@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import GlassCard from '../components/GlassCard';
-import { moodGuidance, moodOptions, supportPlans, type Mood } from '../data/mockData';
+import { moodGuidance, moodOptions, supportPlans, userProfile, type Mood } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 const moodPalette: Record<Mood, string> = {
@@ -27,6 +27,7 @@ export default function MoodScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Text style={styles.header}>Mood & wellbeing</Text>
+      <Text style={styles.subText}>A gentle space to notice how you’re feeling, {userProfile.firstName}.</Text>
 
       <GlassCard title="How are you feeling right now?" subtitle="Your check-in stays private and gentle." accent="warm">
         <View style={styles.moodGrid}>
@@ -103,6 +104,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
     color: palette.text,
+    marginBottom: 4,
+  },
+  subText: {
+    fontSize: 13,
+    color: '#60708C',
+    fontWeight: '600',
     marginBottom: 18,
   },
   moodGrid: {

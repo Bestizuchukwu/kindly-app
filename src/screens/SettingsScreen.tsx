@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
-import { settingsRows } from '../data/mockData';
+import { settingsRows, userProfile } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SettingsScreen() {
@@ -21,6 +21,7 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Text style={styles.header}>Settings</Text>
+      <Text style={styles.subText}>Your comfort, your pace, your choices — {userProfile.firstName}.</Text>
 
       <GlassCard title="Accessibility" subtitle="Designed for all kinds of humans" accent="primary">
         {settingsRows.map((row) => (
@@ -73,6 +74,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
     color: palette.text,
+    marginBottom: 4,
+  },
+  subText: {
+    fontSize: 13,
+    color: '#60708C',
+    fontWeight: '600',
     marginBottom: 18,
   },
   row: {

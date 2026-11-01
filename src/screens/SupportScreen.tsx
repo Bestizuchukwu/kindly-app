@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
 import IconBadge from '../components/IconBadge';
-import { actionDetails, quickHelpOptions } from '../data/mockData';
+import { actionDetails, quickHelpOptions, userProfile } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SupportScreen() {
@@ -27,6 +27,7 @@ export default function SupportScreen() {
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Text style={styles.header}>Support</Text>
+      <Text style={styles.subText}>We’re here with you, {userProfile.firstName}.</Text>
 
       <GlassCard title="Need a calmer path?" subtitle="We can help reduce friction and stress." accent="primary">
         <View style={styles.stack}>
@@ -76,6 +77,12 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '800',
     color: palette.text,
+    marginBottom: 4,
+  },
+  subText: {
+    fontSize: 13,
+    color: '#60708C',
+    fontWeight: '600',
     marginBottom: 18,
   },
   stack: {

@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import ActionChip from '../components/ActionChip';
 import IconBadge from '../components/IconBadge';
-import { actionDetails, homeActions, moodOptions, supportCards, type Mood } from '../data/mockData';
+import { actionDetails, dailyMoments, homeActions, moodOptions, supportCards, userProfile, type Mood } from '../data/mockData';
 import { palette, gradients } from '../theme/colors';
 
 export default function HomeScreen() {
@@ -13,19 +13,22 @@ export default function HomeScreen() {
   const [selectedAction, setSelectedAction] = useState<string>('Mood check');
 
   const currentAction = useMemo(() => actionDetails[selectedAction], [selectedAction]);
+  const greeting = new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 18 ? 'Afternoon' : 'Evening';
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <LinearGradient colors={gradients.primary} style={styles.hero}>
         <View style={styles.topRow}>
           <View>
-            <Text style={styles.kicker}>Good morning</Text>
-            <Text style={styles.heading}>How can I help today?</Text>
+            <Text style={styles.kicker}>Good {greeting}</Text>
+            <Text style={styles.heading}>Hi {userProfile.firstName}, what feels kind today?</Text>
           </View>
           <TouchableOpacity style={styles.profileButton} accessibilityRole="button">
             <MaterialCommunityIcons name="account-circle" size={22} color={palette.white} />
           </TouchableOpacity>
         </View>
+
+        <Text style={styles.subtitle}>{userProfile.role}</Text>
 
         <View style={styles.moodWrap}>
           {moodOptions.map((mood) => (
@@ -41,7 +44,7 @@ export default function HomeScreen() {
           ))}
         </View>
 
-        <Text style={styles.selectionText}>{selectedMood} selected • gentle check-in ready</Text>
+        <Text style={styles.selectionText}>{selectedMood} selected • a gentle check-in is ready</Text>
       </LinearGradient>
 
       <View style={styles.sectionHeader}>
@@ -69,7 +72,7 @@ export default function HomeScreen() {
       </GlassCard>
 
       <View style={styles.grid}>
-        {supportCards.map((card) => (
+        {dailyMoments.map((card) => (
           <GlassCard
             key={card.title}
             title={card.title}
@@ -77,7 +80,7 @@ export default function HomeScreen() {
             accent={card.accent as 'primary' | 'warm' | 'mint'}
           >
             <View style={styles.cardFooter}>
-              <Text style={styles.cardMeta}>{card.cta}</Text>
+              <Text style={styles.cardMeta}>Care note</Text>
               <MaterialCommunityIcons name="arrow-right" size={18} color={palette.primary} />
             </View>
           </GlassCard>
@@ -116,7 +119,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 18,
+    marginBottom: 10,
   },
   kicker: {
     color: '#D8E4FF',
@@ -129,10 +132,16 @@ const styles = StyleSheet.create({
     color: palette.white,
     fontSize: 30,
     fontWeight: '800',
-    width: 220,
+    width: 250,
     marginTop: 6,
     lineHeight: 36,
     letterSpacing: -0.8,
+  },
+  subtitle: {
+    color: '#E7F0FF',
+    fontSize: 13,
+    fontWeight: '600',
+    marginBottom: 18,
   },
   profileButton: {
     width: 42,
