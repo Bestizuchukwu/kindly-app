@@ -15,6 +15,7 @@ export default function AppNavigator() {
       initialRouteName="Home"
       screenOptions={{
         headerShown: false,
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           backgroundColor: '#FFFFFF',
           borderTopWidth: 0,
