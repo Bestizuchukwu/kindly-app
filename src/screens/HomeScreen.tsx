@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -11,30 +11,41 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import ActionChip from '../components/ActionChip';
 import IconBadge from '../components/IconBadge';
-import { homeActions, moodOptions, supportCards } from '../data/mockData';
+import { homeActions, moodOptions, supportCards, type Mood } from '../data/mockData';
 import { palette, gradients } from '../theme/colors';
 
 export default function HomeScreen() {
+  const [selectedMood, setSelectedMood] = useState<Mood>('Calm');
+  const [selectedAction, setSelectedAction] = useState<string>('Mood check');
+
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+    <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <LinearGradient colors={gradients.primary} style={styles.hero}>
         <View style={styles.topRow}>
           <View>
             <Text style={styles.kicker}>Good morning</Text>
             <Text style={styles.heading}>How can I help today?</Text>
           </View>
-          <TouchableOpacity style={styles.profileButton}>
+          <TouchableOpacity style={styles.profileButton} accessibilityRole="button">
             <MaterialCommunityIcons name="account-circle" size={22} color={palette.white} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.moodWrap}>
-          {moodOptions.map((mood, index) => (
-            <TouchableOpacity key={mood} style={[styles.moodPill, index === 0 && styles.moodSelected]}>
-              <Text style={[styles.moodText, index === 0 && styles.moodTextSelected]}>{mood}</Text>
+          {moodOptions.map((mood) => (
+            <TouchableOpacity
+              key={mood}
+              accessibilityRole="button"
+              accessibilityState={{ selected: selectedMood === mood }}
+              onPress={() => setSelectedMood(mood)}
+              style={[styles.moodPill, selectedMood === mood && styles.moodSelected]}
+            >
+              <Text style={[styles.moodText, selectedMood === mood && styles.moodTextSelected]}>{mood}</Text>
             </TouchableOpacity>
           ))}
         </View>
+
+        <Text style={styles.selectionText}>{selectedMood} selected • gentle check-in ready</Text>
       </LinearGradient>
 
       <View style={styles.sectionHeader}>
@@ -42,13 +53,14 @@ export default function HomeScreen() {
         <Text style={styles.sectionLink}>View all</Text>
       </View>
 
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipScroll}>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.chipScroll} contentContainerStyle={styles.chipContent}>
         {homeActions.map((action) => (
           <ActionChip
             key={action.label}
             label={action.label}
             icon={action.icon as any}
-            active={action.label === 'Mood check'}
+            active={selectedAction === action.label}
+            onPress={() => setSelectedAction(action.label)}
           />
         ))}
       </ScrollView>
@@ -62,7 +74,7 @@ export default function HomeScreen() {
             accent={card.accent as 'primary' | 'warm' | 'mint'}
           >
             <View style={styles.cardFooter}>
-              <Text style={styles.cardMeta}>Recommended</Text>
+              <Text style={styles.cardMeta}>{card.cta}</Text>
               <MaterialCommunityIcons name="arrow-right" size={18} color={palette.primary} />
             </View>
           </GlassCard>
@@ -85,7 +97,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 18,
-    paddingBottom: 40,
+    paddingBottom: 84,
   },
   hero: {
     borderRadius: 28,
@@ -153,6 +165,12 @@ const styles = StyleSheet.create({
   moodTextSelected: {
     color: palette.primary,
   },
+  selectionText: {
+    color: '#E9F1FF',
+    fontSize: 12,
+    fontWeight: '700',
+    marginTop: 12,
+  },
   sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -173,9 +191,11 @@ const styles = StyleSheet.create({
   chipScroll: {
     marginBottom: 18,
   },
+  chipContent: {
+    paddingRight: 10,
+  },
   grid: {
-    gap: 12,
-    marginBottom: 18,
+    marginBottom: 6,
   },
   cardFooter: {
     marginTop: 14,

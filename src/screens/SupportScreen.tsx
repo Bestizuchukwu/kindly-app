@@ -1,12 +1,15 @@
-import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
 import IconBadge from '../components/IconBadge';
+import { quickHelpOptions } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SupportScreen() {
+  const [selectedAction, setSelectedAction] = useState('Take a breather');
+
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={styles.content}>
+    <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Text style={styles.header}>Support</Text>
 
       <GlassCard title="Need a calmer path?" subtitle="We can help reduce friction and stress." accent="primary">
@@ -18,9 +21,19 @@ export default function SupportScreen() {
       </GlassCard>
 
       <GlassCard title="Quick help" subtitle="Choose a gentle next action" accent="warm">
-        <Text style={styles.helpText}>Take a breather</Text>
-        <Text style={styles.helpText}>Speak with someone</Text>
-        <Text style={styles.helpText}>Keep it simple</Text>
+        <View style={styles.helpList}>
+          {quickHelpOptions.map((option) => (
+            <TouchableOpacity
+              key={option}
+              accessibilityRole="button"
+              accessibilityState={{ selected: selectedAction === option }}
+              onPress={() => setSelectedAction(option)}
+              style={[styles.helpTextWrap, selectedAction === option && styles.helpTextWrapSelected]}
+            >
+              <Text style={[styles.helpText, selectedAction === option && styles.helpTextSelected]}>{option}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </GlassCard>
     </ScrollView>
   );
@@ -33,7 +46,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: 18,
-    paddingBottom: 40,
+    paddingBottom: 84,
   },
   header: {
     fontSize: 28,
@@ -44,12 +57,26 @@ const styles = StyleSheet.create({
   stack: {
     marginTop: 4,
   },
+  helpList: {
+    marginTop: 6,
+  },
+  helpTextWrap: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(27,31,42,0.08)',
+    paddingVertical: 12,
+  },
+  helpTextWrapSelected: {
+    backgroundColor: 'rgba(31, 94, 255, 0.06)',
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    marginHorizontal: -4,
+  },
   helpText: {
     fontSize: 15,
     fontWeight: '700',
-    paddingVertical: 12,
     color: palette.text,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(27,31,42,0.08)',
+  },
+  helpTextSelected: {
+    color: palette.primary,
   },
 });

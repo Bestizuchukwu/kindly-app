@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { palette } from '../theme/colors';
 
 type GlassCardProps = {
   title?: string;
   subtitle?: string;
   children?: React.ReactNode;
-  accent?: 'primary' | 'warm' | 'mint';
+  accent?: 'primary' | 'warm' | 'mint' | 'violet';
 };
 
 export default function GlassCard({ title, subtitle, children, accent = 'primary' }: GlassCardProps) {
@@ -14,6 +14,7 @@ export default function GlassCard({ title, subtitle, children, accent = 'primary
     primary: ['#EAF0FF', '#EEF3FF'],
     warm: ['#FFF2ED', '#FFF7F3'],
     mint: ['#EAFBF6', '#F0FFF9'],
+    violet: ['#F2EEFF', '#F7F3FF'],
   };
 
   return (
@@ -40,6 +41,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 18,
     elevation: 6,
+    marginBottom: 14,
   },
   headingWrap: {
     marginBottom: 12,

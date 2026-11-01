@@ -21,7 +21,7 @@ export default function IconBadge({ name, label, tint = 'primary' }: IconBadgePr
 
   return (
     <View style={styles.row}>
-      <View style={[styles.badge, { backgroundColor: style.background }]}>
+      <View style={[styles.badge, { backgroundColor: style.background }]}> 
         <MaterialCommunityIcons name={name} size={16} color={style.color} />
       </View>
       <Text style={styles.label}>{label}</Text>

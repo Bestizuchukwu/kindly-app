@@ -13,6 +13,8 @@ type ActionChipProps = {
 export default function ActionChip({ label, icon, active = false, onPress }: ActionChipProps) {
   return (
     <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityState={{ selected: active }}
       activeOpacity={0.9}
       onPress={onPress}
       style={[styles.wrapper, active && styles.activeWrapper]}
@@ -28,7 +30,7 @@ export default function ActionChip({ label, icon, active = false, onPress }: Act
 const styles = StyleSheet.create({
   wrapper: {
     alignItems: 'center',
-    minWidth: 86,
+    minWidth: 90,
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderRadius: 18,

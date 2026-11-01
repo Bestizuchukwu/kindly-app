@@ -1,18 +1,27 @@
 export const palette = {
-  background: '#0B1020',
+  background: '#F4F7FB',
+  surface: '#FFFFFF',
+  surfaceAlt: '#F6F8FC',
   primary: '#1F5EFF',
   primarySoft: '#7C6AFB',
   mint: '#7EDFC2',
+  mintStrong: '#1FAE8B',
   coral: '#FF8E73',
+  warm: '#FFB38A',
   sand: '#F7EFE6',
   white: '#FFFFFF',
   text: '#1B1F2A',
+  textMuted: '#5E697D',
   darkText: '#E8EEF8',
   gray: '#EEF3F8',
   grayStrong: '#98A5BB',
   card: '#F5F7FA',
   darkCard: '#121A2C',
   shadow: 'rgba(31, 94, 255, 0.15)',
+  success: '#23B26D',
+  warning: '#F59E0B',
+  danger: '#EF6A5B',
+  violet: '#7C6AFB',
 };
 
 export const gradients = {
@@ -20,6 +29,7 @@ export const gradients = {
   warm: ['#FF8E73', '#FFB38A'],
   mint: ['#7EDFC2', '#9AE7D7'],
   dark: ['#0F172A', '#1A223A'],
+  soft: ['#EBF1FF', '#F7F1FF'],
 };
 
 export const spacing = {
