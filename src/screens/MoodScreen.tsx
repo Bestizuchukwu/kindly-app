@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import { moodGuidance, moodOptions, supportPlans, type Mood } from '../data/mockData';
 import { palette } from '../theme/colors';
@@ -15,6 +16,7 @@ const moodPalette: Record<Mood, string> = {
 
 export default function MoodScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood>('Calm');
+  const [showPlans, setShowPlans] = useState(true);
 
   const guidance = useMemo(() => moodGuidance[selectedMood], [selectedMood]);
   const recommendedPlan = useMemo(() => {
@@ -51,6 +53,24 @@ export default function MoodScreen() {
             <Text style={styles.summaryText}>{recommendedPlan.description}</Text>
           </View>
         </View>
+
+        {showPlans && (
+          <View style={styles.planList}>
+            {supportPlans.map((plan) => (
+              <TouchableOpacity
+                key={plan.title}
+                activeOpacity={0.85}
+                onPress={() => setShowPlans(false)}
+                style={styles.planCard}
+              >
+                <View style={styles.planIconWrap}>
+                  <MaterialCommunityIcons name={plan.icon as any} size={18} color={palette.primary} />
+                </View>
+                <Text style={styles.planTitle}>{plan.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        )}
 
         <View style={styles.suggestionList}>
           <View style={styles.suggestionRow}>
@@ -136,6 +156,34 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '600',
     lineHeight: 18,
+  },
+  planList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginBottom: 12,
+  },
+  planCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F6F8FC',
+    borderRadius: 14,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+  },
+  planIconWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: 10,
+    marginRight: 8,
+    backgroundColor: '#EBF1FF',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  planTitle: {
+    color: palette.text,
+    fontSize: 12,
+    fontWeight: '700',
   },
   suggestionList: {
     gap: 8,
