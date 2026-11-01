@@ -5,12 +5,22 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import ActionChip from '../components/ActionChip';
 import IconBadge from '../components/IconBadge';
-import { actionDetails, dailyMoments, homeActions, moodOptions, supportCards, userProfile, type Mood } from '../data/mockData';
+import {
+  actionDetails,
+  dailyJournalPrompts,
+  dailyMoments,
+  homeActions,
+  moodOptions,
+  supportCards,
+  userProfile,
+  type Mood,
+} from '../data/mockData';
 import { palette, gradients } from '../theme/colors';
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood>('Calm');
   const [selectedAction, setSelectedAction] = useState<string>('Mood check');
+  const [selectedPrompt, setSelectedPrompt] = useState<string>(dailyJournalPrompts[0]);
 
   const currentAction = useMemo(() => actionDetails[selectedAction], [selectedAction]);
   const greeting = new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 18 ? 'Afternoon' : 'Evening';
@@ -68,6 +78,21 @@ export default function HomeScreen() {
         <View style={styles.actionFooter}>
           <Text style={styles.actionMeta}>{currentAction.cta}</Text>
           <MaterialCommunityIcons name="arrow-right" size={18} color={palette.primary} />
+        </View>
+      </GlassCard>
+
+      <GlassCard title="Daily journal" subtitle={userProfile.journalPrompt} accent="warm">
+        <View style={styles.promptList}>
+          {dailyJournalPrompts.map((prompt) => (
+            <TouchableOpacity
+              key={prompt}
+              activeOpacity={0.8}
+              onPress={() => setSelectedPrompt(prompt)}
+              style={[styles.promptItem, selectedPrompt === prompt && styles.promptItemSelected]}
+            >
+              <Text style={[styles.promptText, selectedPrompt === prompt && styles.promptTextSelected]}>{prompt}</Text>
+            </TouchableOpacity>
+          ))}
         </View>
       </GlassCard>
 
@@ -205,6 +230,29 @@ const styles = StyleSheet.create({
   },
   chipContent: {
     paddingRight: 10,
+  },
+  promptList: {
+    gap: 8,
+  },
+  promptItem: {
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(27,31,42,0.08)',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  promptItemSelected: {
+    backgroundColor: 'rgba(31, 94, 255, 0.06)',
+    borderColor: 'rgba(31, 94, 255, 0.18)',
+  },
+  promptText: {
+    color: palette.text,
+    fontWeight: '600',
+    lineHeight: 20,
+  },
+  promptTextSelected: {
+    color: palette.primary,
+    fontWeight: '700',
   },
   actionFooter: {
     marginTop: 14,

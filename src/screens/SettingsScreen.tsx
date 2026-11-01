@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
-import { settingsRows, userProfile } from '../data/mockData';
+import { reminderNotes, settingsRows, userProfile } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SettingsScreen() {
@@ -47,6 +47,15 @@ export default function SettingsScreen() {
           <Switch value={voiceGuidance} onValueChange={setVoiceGuidance} thumbColor={voiceGuidance ? palette.primary : '#F1F5F9'} />
         </View>
         <Text style={styles.privacyText}>Data use is transparent, limited, and manageable. You can review and refine your preferences at any time.</Text>
+      </GlassCard>
+
+      <GlassCard title="Remember this" subtitle="Gentle reminders for your day" accent="warm">
+        {reminderNotes.map((note) => (
+          <View key={note} style={styles.reminderRow}>
+            <Text style={styles.reminderBullet}>•</Text>
+            <Text style={styles.reminderText}>{note}</Text>
+          </View>
+        ))}
       </GlassCard>
 
       <GlassCard title="Current comfort profile" subtitle="This is your active setup" accent="warm">
@@ -110,5 +119,23 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 22,
     marginTop: 12,
+  },
+  reminderRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    paddingVertical: 8,
+    gap: 8,
+  },
+  reminderBullet: {
+    color: palette.primary,
+    fontSize: 18,
+    lineHeight: 20,
+    fontWeight: '800',
+  },
+  reminderText: {
+    flex: 1,
+    color: palette.text,
+    fontWeight: '600',
+    lineHeight: 21,
   },
 });

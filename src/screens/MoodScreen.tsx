@@ -2,7 +2,14 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import GlassCard from '../components/GlassCard';
-import { moodGuidance, moodOptions, supportPlans, userProfile, type Mood } from '../data/mockData';
+import {
+  emotionalMilestones,
+  moodGuidance,
+  moodOptions,
+  supportPlans,
+  userProfile,
+  type Mood,
+} from '../data/mockData';
 import { palette } from '../theme/colors';
 
 const moodPalette: Record<Mood, string> = {
@@ -86,6 +93,18 @@ export default function MoodScreen() {
             <Text style={styles.suggestionText}>Remember that your check-in stays private and under your control.</Text>
           </View>
         </View>
+      </GlassCard>
+
+      <GlassCard title="Your care timeline" subtitle="Moments of self-trust and steady growth" accent="mint">
+        {emotionalMilestones.map((milestone) => (
+          <View key={milestone.title} style={styles.milestoneRow}>
+            <View style={[styles.milestoneDot, milestone.tone === 'primary' ? styles.dotPrimary : milestone.tone === 'warm' ? styles.dotWarm : styles.dotMint]} />
+            <View style={styles.milestoneTextWrap}>
+              <Text style={styles.milestoneTitle}>{milestone.title}</Text>
+              <Text style={styles.milestoneDetail}>{milestone.detail}</Text>
+            </View>
+          </View>
+        ))}
       </GlassCard>
     </ScrollView>
   );
@@ -205,5 +224,35 @@ const styles = StyleSheet.create({
     color: palette.text,
     fontWeight: '600',
     lineHeight: 22,
+  },
+  milestoneRow: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 10,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: 'rgba(27,31,42,0.08)',
+  },
+  milestoneDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 999,
+    marginTop: 4,
+  },
+  dotPrimary: { backgroundColor: palette.primary },
+  dotWarm: { backgroundColor: '#F29975' },
+  dotMint: { backgroundColor: '#1FAE8B' },
+  milestoneTextWrap: {
+    flex: 1,
+  },
+  milestoneTitle: {
+    color: palette.text,
+    fontWeight: '700',
+    marginBottom: 2,
+  },
+  milestoneDetail: {
+    color: '#5E697D',
+    fontSize: 12,
+    lineHeight: 18,
   },
 });

@@ -5,12 +5,33 @@ export const moodOptions: Mood[] = ['Calm', 'Stressed', 'Tired', 'Joyful', 'Anxi
 export const userProfile = {
   firstName: 'Sam',
   role: 'You deserve a thoughtful rhythm today',
+  journalPrompt: 'What felt kind today?',
 };
 
 export const dailyMoments = [
   { title: 'Slow start', text: 'A softer beginning can make the rest of the day feel lighter.', accent: 'mint' },
   { title: 'Reset point', text: 'Take a break when your energy starts to slip.', accent: 'primary' },
   { title: 'Gentle check-in', text: 'Notice what feels easier, kinder, or more manageable.', accent: 'warm' },
+];
+
+export const dailyJournalPrompts = [
+  'What felt manageable today?',
+  'What made me feel steady?',
+  'What do I need more of tomorrow?',
+  'What deserves a little kindness?',
+];
+
+export const emotionalMilestones = [
+  { title: 'First check-in', detail: 'You noticed your energy and chose a gentler pace.', tone: 'mint' },
+  { title: 'Small win', detail: 'You paused before pushing through and gave yourself room to breathe.', tone: 'primary' },
+  { title: 'Self-trust', detail: 'You listened to your body and made a thoughtful decision.', tone: 'warm' },
+];
+
+export const reminderNotes = [
+  'Take 3 slow breaths before your next task.',
+  'You do not have to earn rest.',
+  'A smaller next step is still progress.',
+  'Your pace is valid.',
 ];
 
 export const moodGuidance: Record<Mood, { title: string; advice: string; tone: 'primary' | 'warm' | 'mint' }> = {
