@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import GlassCard from '../components/GlassCard';
-import { settingsRows } from '../data/mockData';
+import { actionDetails, settingsRows } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 export default function SettingsScreen() {
   const [highContrast, setHighContrast] = useState(true);
   const [privacyMode, setPrivacyMode] = useState(true);
   const [voiceGuidance, setVoiceGuidance] = useState(false);
+
+  const summary = useMemo(
+    () => [
+      { label: 'Mode', value: privacyMode ? 'Private' : 'Shared' },
+      { label: 'Contrast', value: highContrast ? 'High' : 'Default' },
+      { label: 'Voice', value: voiceGuidance ? 'Enabled' : 'Off' },
+    ],
+    [highContrast, privacyMode, voiceGuidance],
+  );
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -37,6 +46,15 @@ export default function SettingsScreen() {
           <Switch value={voiceGuidance} onValueChange={setVoiceGuidance} thumbColor={voiceGuidance ? palette.primary : '#F1F5F9'} />
         </View>
         <Text style={styles.privacyText}>Data use is transparent, limited, and manageable. You can review and refine your preferences at any time.</Text>
+      </GlassCard>
+
+      <GlassCard title="Current comfort profile" subtitle="This is your active setup" accent="warm">
+        {summary.map((item) => (
+          <View key={item.label} style={styles.row}>
+            <Text style={styles.rowLabel}>{item.label}</Text>
+            <Text style={styles.rowValue}>{item.value}</Text>
+          </View>
+        ))}
       </GlassCard>
     </ScrollView>
   );

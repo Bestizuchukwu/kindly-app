@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -11,12 +11,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import GlassCard from '../components/GlassCard';
 import ActionChip from '../components/ActionChip';
 import IconBadge from '../components/IconBadge';
-import { homeActions, moodOptions, supportCards, type Mood } from '../data/mockData';
+import { actionDetails, homeActions, moodOptions, supportCards, type Mood } from '../data/mockData';
 import { palette, gradients } from '../theme/colors';
 
 export default function HomeScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood>('Calm');
   const [selectedAction, setSelectedAction] = useState<string>('Mood check');
+
+  const currentAction = useMemo(() => actionDetails[selectedAction], [selectedAction]);
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -64,6 +66,13 @@ export default function HomeScreen() {
           />
         ))}
       </ScrollView>
+
+      <GlassCard title={currentAction.title} subtitle={currentAction.summary} accent={currentAction.accent}>
+        <View style={styles.actionFooter}>
+          <Text style={styles.actionMeta}>{currentAction.cta}</Text>
+          <MaterialCommunityIcons name="arrow-right" size={18} color={palette.primary} />
+        </View>
+      </GlassCard>
 
       <View style={styles.grid}>
         {supportCards.map((card) => (
@@ -193,6 +202,22 @@ const styles = StyleSheet.create({
   },
   chipContent: {
     paddingRight: 10,
+  },
+  actionFooter: {
+    marginTop: 14,
+    borderTopWidth: 1,
+    borderTopColor: 'rgba(27,31,42,0.08)',
+    paddingTop: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  actionMeta: {
+    color: '#5F6D83',
+    fontWeight: '700',
+    fontSize: 11,
+    textTransform: 'uppercase',
+    letterSpacing: 0.6,
   },
   grid: {
     marginBottom: 6,

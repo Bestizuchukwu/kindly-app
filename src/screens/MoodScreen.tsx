@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import GlassCard from '../components/GlassCard';
-import { moodGuidance, moodOptions, type Mood } from '../data/mockData';
+import { moodGuidance, moodOptions, supportPlans, type Mood } from '../data/mockData';
 import { palette } from '../theme/colors';
 
 const moodPalette: Record<Mood, string> = {
@@ -17,6 +17,11 @@ export default function MoodScreen() {
   const [selectedMood, setSelectedMood] = useState<Mood>('Calm');
 
   const guidance = useMemo(() => moodGuidance[selectedMood], [selectedMood]);
+  const recommendedPlan = useMemo(() => {
+    if (selectedMood === 'Stressed' || selectedMood === 'Anxious') return supportPlans[0];
+    if (selectedMood === 'Tired') return supportPlans[2];
+    return supportPlans[1];
+  }, [selectedMood]);
 
   return (
     <ScrollView style={styles.screen} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -39,6 +44,14 @@ export default function MoodScreen() {
       </GlassCard>
 
       <GlassCard title={guidance.title} subtitle={guidance.advice} accent={guidance.tone}>
+        <View style={styles.supportSummary}>
+          <MaterialCommunityIcons name={recommendedPlan.icon as any} size={22} color={palette.primary} />
+          <View style={styles.summaryTextWrap}>
+            <Text style={styles.summaryTitle}>{recommendedPlan.title}</Text>
+            <Text style={styles.summaryText}>{recommendedPlan.description}</Text>
+          </View>
+        </View>
+
         <View style={styles.suggestionList}>
           <View style={styles.suggestionRow}>
             <MaterialCommunityIcons name="leaf" size={20} color="#1FAE8B" />
@@ -101,6 +114,28 @@ const styles = StyleSheet.create({
   },
   moodTextSelected: {
     color: palette.primary,
+  },
+  supportSummary: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingVertical: 8,
+    marginBottom: 10,
+  },
+  summaryTextWrap: {
+    flex: 1,
+  },
+  summaryTitle: {
+    color: palette.text,
+    fontSize: 15,
+    fontWeight: '800',
+    marginBottom: 2,
+  },
+  summaryText: {
+    color: '#5E697D',
+    fontSize: 12,
+    fontWeight: '600',
+    lineHeight: 18,
   },
   suggestionList: {
     gap: 8,

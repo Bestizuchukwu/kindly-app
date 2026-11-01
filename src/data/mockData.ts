@@ -37,6 +37,33 @@ export const homeActions = [
   { label: 'Accessibility', icon: 'human', hint: 'Adjust comfort and readability' },
 ];
 
+export const actionDetails: Record<string, { title: string; summary: string; accent: 'primary' | 'warm' | 'mint'; cta: string }> = {
+  'Mood check': {
+    title: 'Mood check',
+    summary: 'Take a quick pause and reflect on what would feel easiest right now.',
+    accent: 'mint',
+    cta: 'Check in',
+  },
+  'Quick help': {
+    title: 'Quick help',
+    summary: 'Get low-pressure guidance and support steps without feeling overwhelmed.',
+    accent: 'primary',
+    cta: 'See options',
+  },
+  Privacy: {
+    title: 'Privacy',
+    summary: 'Review how much information is shared and how you can stay in control.',
+    accent: 'warm',
+    cta: 'Review privacy',
+  },
+  Accessibility: {
+    title: 'Accessibility',
+    summary: 'Adjust contrast, layout, and comfort settings to match your needs.',
+    accent: 'mint',
+    cta: 'Open settings',
+  },
+};
+
 export const supportCards = [
   { title: 'Calm mode', text: 'Reduce pressure and simplify actions.', accent: 'mint', cta: 'Try now' },
   { title: 'Focus mode', text: 'Block clutter and keep the path clear.', accent: 'primary', cta: 'Use mode' },
@@ -55,4 +82,10 @@ export const quickHelpOptions = [
   'Speak with someone',
   'Keep it simple',
   'Set a 10-minute timer',
+];
+
+export const supportPlans = [
+  { title: 'Grounding plan', description: 'Pause, breathe, and reduce the task to one next action.', icon: 'leaf', tint: 'mint' },
+  { title: 'Focus plan', description: 'Hide clutter, lower noise, and simplify the next steps.', icon: 'focus-auto', tint: 'primary' },
+  { title: 'Reset plan', description: 'Take a short break and return when your energy feels steadier.', icon: 'restart', tint: 'warm' },
 ];
